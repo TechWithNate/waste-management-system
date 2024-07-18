@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.Report">
+
+    <RelativeLayout
+        android:id="@+id/topAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:contentDescription="Arrow Back"
+            android:src="@drawable/baseline_arrow_back"
+            android:id="@+id/back_btn"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black"
+            android:text="Report"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Report a missed Schedule"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:id="@+id/title"
+        android:layout_below="@+id/topAppBar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter your email"
+        android:layout_marginStart="20dp"
+        android:textSize="15sp"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/title"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/txt_bg"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:hint="example@gmial.com"
+        android:textColor="@color/black"
+        android:layout_below="@+id/tv_email"
+        android:textColorHint="#9F9F9F"
+        android:id="@+id/email"/>
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/email"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:text="Date missed"
+        android:textSize="15sp" />
+
+
+
+    <TextView
+        android:id="@+id/tv_report"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter your a message"
+        android:layout_marginStart="20dp"
+        android:textSize="15sp"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/tv_date"/>
+
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/txt_bg"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:hint="Type..."
+        android:gravity="start"
+        android:singleLine="false"
+        android:textColor="@color/black"
+        android:layout_below="@+id/tv_report"
+        android:textColorHint="#9F9F9F"
+        android:id="@+id/report"/>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cornerRadius="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:backgroundTint="#4B9736"
+        android:text="Send Report"
+        android:textColor="@color/white"
+        android:id="@+id/report_btn"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentBottom="true"/>
+
+
+</RelativeLayout>

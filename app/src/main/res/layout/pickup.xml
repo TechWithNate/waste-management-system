@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop"
+        android:id="@+id/icon"
+        android:layout_centerVertical="true"
+        android:src="@drawable/franco_bg_removed"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Pick up Completed"
+        android:layout_centerVertical="true"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop"
+        android:id="@+id/icon2"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="20dp"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/baseline_restore_from_trash"/>
+
+</RelativeLayout>

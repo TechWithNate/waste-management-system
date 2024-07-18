@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".activities.HomePage">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="#4B9736">
+
+        <ImageView
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:contentDescription="@string/app_name"
+            android:layout_centerInParent="true"
+            android:src="@drawable/franco"/>
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            app:strokeWidth="0dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            app:cardBackgroundColor="#EDEDED"
+            android:id="@+id/schedule_card">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:scaleType="centerCrop"
+                    android:id="@id/schedule_img"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:src="@drawable/baseline_calendar_month"
+                    android:contentDescription="@string/app_name"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Schedule a Pickup"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:textAlignment="center"
+                    android:layout_below="@+id/schedule_img"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"/>
+
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="30dp"
+            app:strokeWidth="0dp"
+            app:cardCornerRadius="10dp"
+            android:layout_toEndOf="@+id/schedule_card"
+            android:layout_marginEnd="20dp"
+            app:cardElevation="5dp"
+            app:cardBackgroundColor="#EDEDED"
+            android:id="@+id/missed_schedule_card">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:scaleType="centerCrop"
+                    android:id="@id/missed_schedule_img"
+                    android:src="@drawable/baseline_report"
+                    android:contentDescription="@string/app_name"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Report Missed Pickup"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:textAlignment="center"
+                    android:layout_below="@+id/missed_schedule_img"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"/>
+
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            app:strokeWidth="0dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            app:cardBackgroundColor="#EDEDED"
+            android:layout_below="@+id/schedule_card"
+            android:id="@+id/wallet_card">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:scaleType="centerCrop"
+                    android:id="@id/wallet_img"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:src="@drawable/baseline_wallet"
+                    android:contentDescription="@string/app_name"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View wallet"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:textAlignment="center"
+                    android:layout_below="@+id/wallet_img"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"/>
+
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="30dp"
+            app:strokeWidth="0dp"
+            app:cardCornerRadius="10dp"
+            android:layout_below="@+id/missed_schedule_card"
+            android:layout_toEndOf="@+id/schedule_card"
+            android:layout_marginEnd="20dp"
+            app:cardElevation="5dp"
+            app:cardBackgroundColor="#EDEDED"
+            android:id="@+id/pickups_card">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:scaleType="centerCrop"
+                    android:id="@id/pickups_img"
+                    android:src="@drawable/baseline_truck"
+                    android:contentDescription="@string/app_name"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View all Pickups"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:textAlignment="center"
+                    android:layout_below="@+id/pickups_img"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"/>
+
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="30dp"
+            app:strokeWidth="0dp"
+            app:cardCornerRadius="10dp"
+            android:layout_below="@+id/pickups_card"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:cardElevation="5dp"
+            android:layout_marginBottom="20dp"
+            app:cardBackgroundColor="#EDEDED"
+
+            android:id="@+id/account">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:scaleType="centerCrop"
+                    android:id="@id/account_img"
+                    android:src="@drawable/baseline_account"
+                    android:contentDescription="@string/app_name"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View your profile"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="5dp"
+                    android:textAlignment="center"
+                    android:layout_toEndOf="@+id/account_img"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"/>
+
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>
