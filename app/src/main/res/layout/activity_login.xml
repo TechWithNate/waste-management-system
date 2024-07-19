@@ -84,7 +84,7 @@
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/create_btn"
+        android:id="@+id/login_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/create_acc_btn"
@@ -96,6 +96,15 @@
         app:backgroundTint="#4B9736"
         app:cornerRadius="10dp" />
 
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/login_btn"
+        android:layout_marginBottom="40dp"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/progress_bar"/>
+
     <TextView
         android:id="@+id/create_acc_btn"
         android:layout_width="wrap_content"
@@ -103,7 +112,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:text="Login"
+        android:text="Create Account"
         android:layout_marginBottom="30dp"
         android:textColor="#536DFE"
         android:textSize="18sp" />

@@ -9,6 +9,7 @@
     tools:context=".activities.AllPickUps">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/all_pick_up_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

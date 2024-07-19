@@ -1,6 +1,8 @@
 package com.nate.wastetracker.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +14,8 @@ import com.nate.wastetracker.R;
 
 public class SplashScreen extends AppCompatActivity {
 
+    private static final int DELAY_MILLIS = 2000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,5 +26,18 @@ public class SplashScreen extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(SplashScreen.this, CreateAccount.class));
+                finish();
+            }
+        }, DELAY_MILLIS);
+
     }
+
+
+
 }

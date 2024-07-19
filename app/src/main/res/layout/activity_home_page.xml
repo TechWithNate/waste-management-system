@@ -223,7 +223,6 @@
             app:cardElevation="5dp"
             android:layout_marginBottom="20dp"
             app:cardBackgroundColor="#EDEDED"
-
             android:id="@+id/account">
 
             <RelativeLayout
