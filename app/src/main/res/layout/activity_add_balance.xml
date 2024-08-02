@@ -9,6 +9,7 @@
     tools:context=".activities.AddBalance">
 
     <RelativeLayout
+        android:id="@+id/curve"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:background="@drawable/curve2_bg">
@@ -100,5 +101,17 @@
         android:id="@+id/add_balance"
         android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/curve"
+        android:layout_marginTop="40dp"
+        android:indeterminateTint="#4B9736"
+        android:visibility="gone"
+        android:id="@+id/progress_bar"/>
+
+
 
 </RelativeLayout>
