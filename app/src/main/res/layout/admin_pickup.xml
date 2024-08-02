@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#E9E8E8"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop"
+        android:id="@+id/icon"
+        android:layout_centerVertical="true"
+        android:src="@drawable/franco_bg_removed"/>
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Pick up Completed"
+        android:layout_centerVertical="true"/>
+
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switchMaterial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:thumbTint="@color/primary_color"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="20dp"
+        android:layout_alignParentEnd="true"
+        app:trackTint="#B3E6A4" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="House 30"
+        android:layout_below="@+id/switchMaterial"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:textSize="10sp"
+        android:layout_marginEnd="20dp"
+        android:id="@+id/houseNo"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/primary_color"
+        android:layout_below="@+id/houseNo"/>
+
+
+
+</RelativeLayout>
