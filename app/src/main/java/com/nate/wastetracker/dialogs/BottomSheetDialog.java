@@ -27,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.nate.wastetracker.R;
 import com.nate.wastetracker.activities.Report;
 import com.nate.wastetracker.activities.Waste;
+import com.nate.wastetracker.model.BalanceUpdater;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -46,6 +47,7 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
     private AutoCompleteTextView type;
     private MaterialCardView dateLayout;
     private Calendar calendar;
+    private BalanceUpdater balanceUpdater;
 
 
     @SuppressLint("MissingInflatedId")
@@ -53,6 +55,7 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.bottom_sheet_layout, container, false);
+        balanceUpdater = new BalanceUpdater(view.getContext(), null);
 
         etAddress = view.findViewById(R.id.address);
         date = view.findViewById(R.id.date);
@@ -82,10 +85,14 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
         databaseReference = FirebaseDatabase.getInstance().getReference("wastes").child(firebaseAuth.getUid()).child("schedule");
 
         btnSubmit.setOnClickListener(v -> {
+            balanceUpdater.withdrawAmount(50.00);
+
+
             String address = etAddress.getText().toString().trim();
             String pday = day.getText().toString().trim();
             String pdate = date.getText().toString().trim();
             String ptype = type.getText().toString().trim();
+            String status = "Incomplete";
 
             if (TextUtils.isEmpty(address) || TextUtils.isEmpty(pday) || TextUtils.isEmpty(pdate) || TextUtils.isEmpty(ptype)) {
                 Toast.makeText(getContext(), "All fields are required", Toast.LENGTH_SHORT).show();
@@ -94,7 +101,7 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
 
             String id = databaseReference.push().getKey();
             if (id != null) {
-                Waste addressModel = new Waste(id, pdate, pday,address, ptype, "Incomplete");
+                Waste addressModel = new Waste(id, pdate, pday,address, ptype, status);
                 databaseReference.child(id).setValue(addressModel)
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,7 @@ import java.util.Objects;
 
 public class Report extends AppCompatActivity {
 
+    private ImageView backBtn;
     private EditText email;
     private EditText message;
     private MaterialCardView dateLayout;
@@ -70,6 +72,8 @@ public class Report extends AppCompatActivity {
             checkFields();
         });
 
+        backBtn.setOnClickListener(v -> finish());
+
     }
 
     private void initViews(){
@@ -80,6 +84,7 @@ public class Report extends AppCompatActivity {
         date = findViewById(R.id.tvDate);
         tday = findViewById(R.id.tvDay);
         progressBar = findViewById(R.id.progress_bar);
+        backBtn = findViewById(R.id.back_btn);
 
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("wastes");

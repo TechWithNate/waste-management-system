@@ -1,8 +1,10 @@
 package com.nate.wastetracker.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -21,6 +23,7 @@ import java.util.Objects;
 
 public class Profile extends AppCompatActivity {
 
+    private TextView initials;
     private EditText username;
     private EditText address;
     private EditText contact;
@@ -43,11 +46,17 @@ public class Profile extends AppCompatActivity {
         });
         initViews();
         loadUserData();
+        logoutBtn.setOnClickListener(v -> {
+            firebaseAuth.signOut();
+            startActivity(new Intent(Profile.this, Login.class));
+            finish();
+        });
 
 
     }
 
     private void initViews(){
+        initials = findViewById(R.id.initials);
         username = findViewById(R.id.username);
         address = findViewById(R.id.address);
         contact = findViewById(R.id.contact);
@@ -65,6 +74,8 @@ public class Profile extends AppCompatActivity {
                     username.setText(name);
                     address.setText(snapshot.child("address").getValue(String.class));
                     contact.setText(snapshot.child("contact").getValue(String.class));
+                    assert name != null;
+                    initials.setText(getInitials(name));
 
                 } else {
                     Toast.makeText(Profile.this, "User not found", Toast.LENGTH_SHORT).show();
@@ -73,6 +84,27 @@ public class Profile extends AppCompatActivity {
                 Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             });
         }
+    }
+
+    public static String getInitials(String name) {
+        StringBuilder initials = new StringBuilder();
+
+        // Split the string into words
+        String[] words = name.trim().split("\\s+");
+
+        // Loop through the words and take the first letter of each
+        for (String word : words) {
+            if (!word.isEmpty()) {
+                initials.append(word.charAt(0));
+            }
+        }
+
+        // If there are more than two initials, just take the first two
+        if (initials.length() > 2) {
+            return initials.substring(0, 2).toUpperCase();
+        }
+
+        return initials.toString().toUpperCase();
     }
 
 

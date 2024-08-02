@@ -114,4 +114,16 @@ public class CreateAccount extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (firebaseUser != null){
+            Intent intent = new Intent(CreateAccount.this, HomePage.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        }
+
+
+    }
 }

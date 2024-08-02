@@ -9,6 +9,7 @@ public class Waste {
     private String address;
     private String type;
     private String status;
+    private String wasteID;
 
     public Waste() {
     }
@@ -94,4 +95,22 @@ public class Waste {
     public void setDay(String day) {
         this.day = day;
     }
+
+    public String getWasteID() {
+        return wasteID;
+    }
+
+    public void setWasteID(String wasteID) {
+        this.wasteID = wasteID;
+    }
+
+
+    public void toggleStatus() {
+        if ("completed".equals(status)) {
+            status = "incomplete";
+        } else {
+            status = "completed";
+        }
+    }
+
 }

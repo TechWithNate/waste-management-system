@@ -2,13 +2,17 @@ package com.nate.wastetracker.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.nate.wastetracker.R;
@@ -37,7 +41,7 @@ public class HomePage extends AppCompatActivity {
         schedule.setOnClickListener(v -> {
             //Open Bottom Sheet to select address, date and item type and send to db
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog();
-            bottomSheetDialog.show(getSupportFragmentManager(), "BottomSheetDialog");
+            bottomSheetDialog.show(getSupportFragmentManager(), bottomSheetDialog.getTag());
         });
 
         report.setOnClickListener(v -> {
@@ -61,6 +65,7 @@ public class HomePage extends AppCompatActivity {
         });
 
     }
+
 
     private void initViews(){
         schedule = findViewById(R.id.schedule_card);

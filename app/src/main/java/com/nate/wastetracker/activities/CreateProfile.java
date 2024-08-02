@@ -77,6 +77,7 @@ public class CreateProfile extends AppCompatActivity {
             userMap.put("username", username);
             userMap.put("contact", phoneNumber);
             userMap.put("address", address);
+            userMap.put("balance", 0.00);
             sendUserData(userMap);
     }
 
