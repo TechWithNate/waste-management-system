@@ -23,7 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.nate.wastetracker.R;
-import com.nate.wastetracker.activities.AdminPickup;
+
 import com.nate.wastetracker.activities.PickUpModel;
 import com.nate.wastetracker.activities.Waste;
 
@@ -36,11 +36,18 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.ViewHolder> 
     private Context context;
     private ArrayList<Waste> pickUpModels;
     DatabaseReference databaseReference;
+    private SwitchListener switchListener;
 
-    public AdminAdapter(Context context, ArrayList<Waste> pickUpModels) {
+
+    public interface SwitchListener{
+        void switchPositionSelected(int position);
+    }
+
+    public AdminAdapter(Context context, ArrayList<Waste> pickUpModels, SwitchListener switchListener) {
         databaseReference = FirebaseDatabase.getInstance().getReference("wastes");
         this.context = context;
         this.pickUpModels = pickUpModels;
+        this.switchListener = switchListener;
     }
 
     @NonNull
@@ -57,27 +64,31 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.ViewHolder> 
         Waste wastepickUp = pickUpModels.get(position);
         holder.status.setText(wastepickUp.getStatus());
         holder.houseNo.setText(wastepickUp.getAddress());
+        switchListener.switchPositionSelected(position);
 
-
-
-        holder.switchMaterial.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (null != wastepickUp){
+            holder.switchMaterial.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 if (isChecked) {
+
                     holder.status.setText("Complete");
-                    //updateStatusInDatabase(wastpickUp);
+                    //updateStatusInDatabase(wastepickUp);
                     //pickUpModel.setStatus("Complete");
-                    //updatePickUpStatus(Map.of("status", "Completed"));
+                    updatePickUpStatus(wastepickUp, Map.of("status", "Completed"));
                     buttonView.setTextColor(context.getResources().getColor(android.R.color.holo_green_light));
                 } else {
                     holder.status.setText("Incomplete");
-                   // pickUpModel.setStatus("Incomplete");
-                    //updateStatusInDatabase(wastpickUp);
-                   // updatePickUpStatus(Map.of("status", "Incomplete"));
+                    // pickUpModel.setStatus("Incomplete");
+                    //updateStatusInDatabase(wastepickUp);
+                    updatePickUpStatus(wastepickUp, Map.of("status", "Incomplete"));
                     buttonView.setTextColor(context.getResources().getColor(android.R.color.white));
                 }
-            }
-        });
+            });
+        }else {
+            Toast.makeText(context, "Eppty", Toast.LENGTH_SHORT).show();
+        }
+
+
+
     }
 
     @Override
@@ -88,12 +99,12 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.ViewHolder> 
     private void updateStatusInDatabase(Waste pickUp) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance()
                 .getReference("wastes")
-                //.child(firebaseAuth.getUid()) // Use the correct path.child(pickUp.getId()) // Make sure to use the correct path
+                .child(pickUp.getId()) // Use the correct path.child(pickUp.getId()) // Make sure to use the correct path
                 .child("schedule")
-                .child(pickUp.getId()); // or other unique ID under schedule
+                .child(pickUp.getWasteID()); // or other unique ID under schedule
         Toast.makeText(context, pickUp.getWasteID(), Toast.LENGTH_SHORT).show();
 
-//        databaseReference.child("status").setValue(pickUp.getStatus());
+        databaseReference.child("status").setValue(pickUp.getStatus());
     }
 
     private void updatePickUpStatus(Waste pickUp, Map<String, Object> statusMap) {
@@ -111,7 +122,7 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.ViewHolder> 
                             if (wastePickup == null){
                                 Toast.makeText(context, "Waste is null", Toast.LENGTH_SHORT).show();
                             }else{
-                                databaseReference.child(wastePickup.getId()).updateChildren(statusMap).addOnCompleteListener(task -> {
+                                databaseReference.child(wastePickup.getId()).child(wastePickup.getWasteID()).updateChildren(statusMap).addOnCompleteListener(task -> {
                                     if (task.isSuccessful()){
                                         Toast.makeText(context, "Waste Dispatched", Toast.LENGTH_SHORT).show();
                                     }else {

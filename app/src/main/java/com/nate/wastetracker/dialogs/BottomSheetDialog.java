@@ -101,7 +101,7 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
 
             String id = databaseReference.push().getKey();
             if (id != null) {
-                Waste addressModel = new Waste(id, pdate, pday,address, ptype, status);
+                Waste addressModel = new Waste(firebaseAuth.getUid(), id, pdate, pday,address, ptype, status);
                 databaseReference.child(id).setValue(addressModel)
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {

@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.nate.wastetracker.R;
 
 public class Login extends AppCompatActivity {
@@ -83,15 +84,34 @@ public class Login extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
+
+                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                    if (user != null) {
+                        String userEmail = user.getEmail();
+                        if ("wasteadmin@gmail.com".equals(userEmail)) {
+                            openAdminHomePage();
+                        } else {
+                            openHomePage();
+                        }
+                    }
                     progressbar.setVisibility(View.GONE);
-                    startActivity(new Intent(Login.this, HomePage.class));
-                    finish();
+
                 }else{
                     progressbar.setVisibility(View.GONE);
                     Toast.makeText(Login.this, "Login failed", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    private void openHomePage() {
+        startActivity(new Intent(Login.this, HomePage.class));
+        finish();
+    }
+
+    private void openAdminHomePage() {
+        startActivity(new Intent(Login.this, AdminHome.class));
+        finish();
     }
 
 }

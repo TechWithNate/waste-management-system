@@ -23,8 +23,9 @@ public class Waste {
 
     }
 
-    public Waste(String id, String date, String day, String address, String type, String status) {
+    public Waste(String id, String wasteID, String date, String day, String address, String type, String status) {
         this.id = id;
+        this.wasteID = wasteID;
         this.date = date;
         this.day = day;
         this.address = address;

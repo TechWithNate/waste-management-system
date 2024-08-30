@@ -23,8 +23,9 @@ import com.nate.wastetracker.R;
 import com.nate.wastetracker.adapter.AdminAdapter;
 
 import java.util.ArrayList;
+import java.util.Map;
 
-public class AdminPickup extends AppCompatActivity {
+public class AdminPickup extends AppCompatActivity{
 
     private ArrayList<Waste> pickUpModels;
     private RecyclerView pickUpLists;
@@ -42,7 +43,14 @@ public class AdminPickup extends AppCompatActivity {
         });
         initViews();
 
-        adapter = new AdminAdapter(this, pickUpModels);
+        //adapter = new AdminAdapter(this, pickUpModels);
+        adapter = new AdminAdapter(this, pickUpModels, new AdminAdapter.SwitchListener() {
+            @Override
+            public void switchPositionSelected(int position) {
+                pickUpModels.get(position);
+            }
+        });
+
         pickUpLists.setHasFixedSize(true);
         pickUpLists.setLayoutManager(new LinearLayoutManager(this));
         pickUpLists.setAdapter(adapter);
@@ -103,5 +111,45 @@ public class AdminPickup extends AppCompatActivity {
 //            }
 //        });
     }
+
+//    private void updatePickUpStatus(Waste pickUp, Map<String, Object> statusMap) {
+//        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+//
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                pickUpModels.clear();
+//                if (snapshot.exists()) {
+//                    for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+//                        for (DataSnapshot pickUpSnapshot : userSnapshot.child("schedule").getChildren()) {
+//                            Waste wastePickup = pickUpSnapshot.getValue(Waste.class);
+//
+//                            if (wastePickup == null){
+//                                Toast.makeText(context, "Waste is null", Toast.LENGTH_SHORT).show();
+//                            }else{
+//                                databaseReference.child(wastePickup.getId()).updateChildren(statusMap).addOnCompleteListener(task -> {
+//                                    if (task.isSuccessful()){
+//                                        Toast.makeText(context, "Waste Dispatched", Toast.LENGTH_SHORT).show();
+//                                    }else {
+//                                        Toast.makeText(context, "failed", Toast.LENGTH_SHORT).show();
+//                                    }
+//                                });
+//                                Toast.makeText(context, "Not null", Toast.LENGTH_SHORT).show();
+//                            }
+//
+//                        }
+//                    }
+//
+//                } else {
+//                    Toast.makeText(context, "No data Exists", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//    }
 
 }
