@@ -8,6 +8,64 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:979583663708:android:c1820d340dd651ee82b099",
+        "android_client_info": {
+          "package_name": "com.nate.atucafeteria"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "979583663708-3km0inhauqddmtunjtdpm5v57vrhujf3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7o6RS3QKsECJXolRJkD-PIjcTOQpNQ-Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "979583663708-3km0inhauqddmtunjtdpm5v57vrhujf3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:979583663708:android:dc1ea9031c98c41682b099",
+        "android_client_info": {
+          "package_name": "com.nate.royalquest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "979583663708-3km0inhauqddmtunjtdpm5v57vrhujf3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7o6RS3QKsECJXolRJkD-PIjcTOQpNQ-Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "979583663708-3km0inhauqddmtunjtdpm5v57vrhujf3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:979583663708:android:1ef897477503f14282b099",
         "android_client_info": {
           "package_name": "com.nate.stctickets"

@@ -79,6 +79,8 @@ public class Profile extends AppCompatActivity {
 
                 } else {
                     Toast.makeText(Profile.this, "User not found", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(Profile.this, CreateProfile.class));
+                    finish();
                 }
             }).addOnFailureListener(e -> {
                 Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();

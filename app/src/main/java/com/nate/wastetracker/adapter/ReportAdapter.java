@@ -37,7 +37,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder
         holder.email.setText(reportModel.getEmail());
         holder.houseNo.setText(reportModel.getHouseNo());
         holder.date.setText(reportModel.getDate());
-        holder.report.setText(reportModel.getReport());
+        holder.report.setText(reportModel.getMessage());
     }
 
     @Override

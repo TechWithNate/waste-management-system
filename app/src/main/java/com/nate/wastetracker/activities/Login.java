@@ -88,7 +88,7 @@ public class Login extends AppCompatActivity {
                     FirebaseUser user = firebaseAuth.getCurrentUser();
                     if (user != null) {
                         String userEmail = user.getEmail();
-                        if ("wasteadmin@gmail.com".equals(userEmail)) {
+                        if ("francowasteadmin@gmail.com".equals(userEmail)) {
                             openAdminHomePage();
                         } else {
                             openHomePage();

@@ -20,6 +20,7 @@
             app:title="Dashboard"
             android:background="@color/primary_color"
             app:titleTextColor="@color/white"
+            app:menu="@menu/menu"
             app:navigationIconTint="@color/white"
             android:id="@+id/toolbar"/>
 
@@ -34,6 +35,7 @@
         android:layout_marginEnd="20dp"
         app:cardElevation="10dp"
         android:id="@+id/card1"
+        app:cardBackgroundColor="@color/white"
         app:strokeWidth="0dp">
 
         <RelativeLayout
@@ -71,6 +73,7 @@
         android:layout_below="@+id/card1"
         android:layout_marginTop="40dp"
         android:id="@+id/card2"
+        app:cardBackgroundColor="@color/white"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         app:cardElevation="10dp"

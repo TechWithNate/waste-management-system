@@ -4,13 +4,13 @@ public class ReportModel {
     private String email;
     private String houseNo;
     private String date;
-    private String report;
+    private String message;
 
-    public ReportModel(String email, String houseNo, String date, String report) {
+    public ReportModel(String email, String houseNo, String date, String message) {
         this.email = email;
         this.houseNo = houseNo;
         this.date = date;
-        this.report = report;
+        this.message = message;
     }
 
     public ReportModel() {
@@ -40,11 +40,11 @@ public class ReportModel {
         this.date = date;
     }
 
-    public String getReport() {
-        return report;
+    public String getMessage() {
+        return message;
     }
 
-    public void setReport(String report) {
-        this.report = report;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

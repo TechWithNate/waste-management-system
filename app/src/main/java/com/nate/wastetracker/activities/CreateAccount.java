@@ -118,12 +118,32 @@ public class CreateAccount extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (firebaseUser != null){
-            Intent intent = new Intent(CreateAccount.this, HomePage.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
+
+            String userEmail = firebaseUser.getEmail();
+            if ("francowasteadmin@gmail.com".equals(userEmail)) {
+                openAdminHomePage();
+            } else {
+                openHomePage();
+            }
+
         }
 
 
+
+
+    }
+
+    private void openAdminHomePage() {
+        Intent intent = new Intent(CreateAccount.this, AdminHome.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    private void openHomePage() {
+        Intent intent = new Intent(CreateAccount.this, HomePage.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 }

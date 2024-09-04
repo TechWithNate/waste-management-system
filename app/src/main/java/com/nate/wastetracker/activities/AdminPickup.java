@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,11 +26,15 @@ import com.nate.wastetracker.adapter.AdminAdapter;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class AdminPickup extends AppCompatActivity{
+public class AdminPickup extends AppCompatActivity implements AdminAdapter.SwitchListener {
 
     private ArrayList<Waste> pickUpModels;
     private RecyclerView pickUpLists;
     private AdminAdapter adapter;
+    private Waste model;
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference databaseReference;
+    private MaterialToolbar topAppBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +48,14 @@ public class AdminPickup extends AppCompatActivity{
         });
         initViews();
 
-        //adapter = new AdminAdapter(this, pickUpModels);
-        adapter = new AdminAdapter(this, pickUpModels, new AdminAdapter.SwitchListener() {
-            @Override
-            public void switchPositionSelected(int position) {
-                pickUpModels.get(position);
-            }
+        topAppBar.setNavigationOnClickListener(v -> {
+            finish();
         });
+
+
+
+        //adapter = new AdminAdapter(this, pickUpModels);
+        adapter = new AdminAdapter(this, pickUpModels, this);
 
         pickUpLists.setHasFixedSize(true);
         pickUpLists.setLayoutManager(new LinearLayoutManager(this));
@@ -60,12 +66,15 @@ public class AdminPickup extends AppCompatActivity{
     private void initViews() {
         pickUpLists = findViewById(R.id.all_pick_up_list);
         pickUpModels = new ArrayList<>();
+        firebaseAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference("wastes");
+        topAppBar = findViewById(R.id.topAppBar);
     }
 
 
     private void retrieveAllPickUps() {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("wastes");
+        //DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("wastes");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -90,31 +99,36 @@ public class AdminPickup extends AppCompatActivity{
             }
         });
 
-//        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @SuppressLint("NotifyDataSetChanged")
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if (snapshot.exists()){
-//                    for (DataSnapshot dataSnapshot: snapshot.getChildren()){
-//                        PickUpModel pickUpModel = dataSnapshot.getValue(PickUpModel.class);
-//                        pickUpModels.add(pickUpModel);
-//                    }
-//                    adapter.notifyDataSetChanged();
-//                }else{
-//                    Toast.makeText(AdminPickup.this, "No data Exists", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
+
     }
 
-//    private void updatePickUpStatus(Waste pickUp, Map<String, Object> statusMap) {
-//        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-//
+    @Override
+    public void onSwitchClick(int position, boolean isChecked) {
+        Waste waste = pickUpModels.get(position);
+
+        // Update the status
+        String newStatus = isChecked ? "Complete" : "Incomplete";
+        waste.setStatus(newStatus);
+
+        // Update Firebase with the new status
+        updateStatusInDatabase(position);
+    }
+
+    @Override
+    public void switchPositionSelected(int position) {
+        updateSwitch(pickUpModels.get(position));
+    }
+
+    private void updateSwitch(Waste waste) {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance()
+                .getReference("wastes")
+                .child(waste.getId()) // Use the correct path.child(pickUp.getId()) // Make sure to use the correct path
+                .child("schedule");
+
+                //.child(waste.getWasteID()); // or other unique ID under schedule
+        Toast.makeText(AdminPickup.this, "ID is: "+waste.getId(), Toast.LENGTH_SHORT).show();
+
+        //databaseReference.child("status").setValue(waste.getStatus());
 //        databaseReference.addValueEventListener(new ValueEventListener() {
 //            @Override
 //            public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -127,7 +141,7 @@ public class AdminPickup extends AppCompatActivity{
 //                            if (wastePickup == null){
 //                                Toast.makeText(context, "Waste is null", Toast.LENGTH_SHORT).show();
 //                            }else{
-//                                databaseReference.child(wastePickup.getId()).updateChildren(statusMap).addOnCompleteListener(task -> {
+//                                databaseReference.child(wastePickup.getId()).child(wastePickup.getWasteID()).updateChildren(statusMap).addOnCompleteListener(task -> {
 //                                    if (task.isSuccessful()){
 //                                        Toast.makeText(context, "Waste Dispatched", Toast.LENGTH_SHORT).show();
 //                                    }else {
@@ -150,6 +164,45 @@ public class AdminPickup extends AppCompatActivity{
 //
 //            }
 //        });
-//    }
+    }
+
+
+    private void updateStatusInDatabase(int position) {
+
+        model = pickUpModels.get(position);
+        if (model != null) {
+            // Assuming you have an order ID or user ID to identify the order
+            String userId = model.getId();
+
+            // Update the status in Firebase
+            databaseReference.child(model.getId()).child("schedule").child(model.getWasteID()).child("status").setValue("Completed")
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(AdminPickup.this, "Status updated to ", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(AdminPickup.this, "Failed to update order status", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } else {
+            Toast.makeText(this, "No order to update", Toast.LENGTH_SHORT).show();
+        }
+        // Assuming `databaseReference` is your Firebase reference
+//        if (firebaseAuth.getUid() != null && waste.getId() != null) {
+//
+//            databaseReference.child("schedule").child(waste.getId()).child(waste.getWasteID()).child("status")
+//                    .setValue(waste)
+//                    .addOnCompleteListener(task -> {
+//                        if (task.isSuccessful()) {
+//                            Toast.makeText(this, "Status updated to " + waste.getStatus(), Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            Toast.makeText(this, "Failed to update status", Toast.LENGTH_SHORT).show();
+//                        }
+//                    })
+//                    .addOnFailureListener(e -> {
+//                        Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+//                    });
+//        }
+    }
+
 
 }

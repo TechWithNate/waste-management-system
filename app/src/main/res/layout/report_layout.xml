@@ -5,6 +5,7 @@
     android:background="@color/white"
     app:cardElevation="10dp"
     app:cardCornerRadius="10dp"
+    android:layout_marginBottom="10dp"
     app:cardBackgroundColor="@color/primary_color"
     android:layout_height="wrap_content">
 
@@ -48,9 +49,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
         android:layout_below="@+id/date"
         android:gravity="start"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:textColor="@color/white"
         android:text="@string/dummy_text"
         android:id="@+id/report"/>

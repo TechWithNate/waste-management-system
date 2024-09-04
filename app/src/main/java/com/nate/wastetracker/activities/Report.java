@@ -109,7 +109,7 @@ public class Report extends AppCompatActivity {
         String id = databaseReference.push().getKey();
         Waste waste = new Waste(id, email, message, date, day);
         if (null != id && firebaseAuth.getUid() != null){
-            databaseReference.child(firebaseAuth.getUid()).child(id).setValue(waste).addOnCompleteListener(
+            databaseReference.child(firebaseAuth.getUid()).child("reports").child(id).setValue(waste).addOnCompleteListener(
                     task -> {
                         if (task.isSuccessful()){
                             navigateToHome();

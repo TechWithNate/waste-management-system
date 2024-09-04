@@ -5,16 +5,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -24,12 +20,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.nate.wastetracker.R;
 
-import com.nate.wastetracker.activities.PickUpModel;
 import com.nate.wastetracker.activities.Waste;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Objects;
 
 public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.ViewHolder> {
 
@@ -40,6 +34,8 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.ViewHolder> 
 
 
     public interface SwitchListener{
+        void onSwitchClick(int position, boolean isChecked);
+
         void switchPositionSelected(int position);
     }
 
@@ -66,6 +62,13 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.ViewHolder> 
         holder.houseNo.setText(wastepickUp.getAddress());
         switchListener.switchPositionSelected(position);
 
+        // Set switch status based on the current state
+        holder.switchMaterial.setChecked("Complete".equals(wastepickUp.getStatus()));
+
+        holder.switchMaterial.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            switchListener.onSwitchClick(position, isChecked);
+        });
+
         if (null != wastepickUp){
             holder.switchMaterial.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 if (isChecked) {
@@ -73,18 +76,18 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.ViewHolder> 
                     holder.status.setText("Complete");
                     //updateStatusInDatabase(wastepickUp);
                     //pickUpModel.setStatus("Complete");
-                    updatePickUpStatus(wastepickUp, Map.of("status", "Completed"));
+                    //updatePickUpStatus(wastepickUp, Map.of("status", "Completed"));
                     buttonView.setTextColor(context.getResources().getColor(android.R.color.holo_green_light));
                 } else {
                     holder.status.setText("Incomplete");
                     // pickUpModel.setStatus("Incomplete");
                     //updateStatusInDatabase(wastepickUp);
-                    updatePickUpStatus(wastepickUp, Map.of("status", "Incomplete"));
+                    //updatePickUpStatus(wastepickUp, Map.of("status", "Incomplete"));
                     buttonView.setTextColor(context.getResources().getColor(android.R.color.white));
                 }
             });
         }else {
-            Toast.makeText(context, "Eppty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Empty", Toast.LENGTH_SHORT).show();
         }
 
 
