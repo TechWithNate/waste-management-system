@@ -123,9 +123,8 @@ public class AdminPickup extends AppCompatActivity implements AdminAdapter.Switc
         DatabaseReference databaseReference = FirebaseDatabase.getInstance()
                 .getReference("wastes")
                 .child(waste.getId()) // Use the correct path.child(pickUp.getId()) // Make sure to use the correct path
-                .child("schedule");
-
-                //.child(waste.getWasteID()); // or other unique ID under schedule
+                .child("schedule")
+                .child(waste.getWasteID()); // or other unique ID under schedule
         Toast.makeText(AdminPickup.this, "ID is: "+waste.getId(), Toast.LENGTH_SHORT).show();
 
         //databaseReference.child("status").setValue(waste.getStatus());
